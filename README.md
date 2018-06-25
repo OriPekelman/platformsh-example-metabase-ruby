@@ -1,10 +1,6 @@
-#Platform.sh Ruby Awesomeness Demo
+#Platform.sh Metabase Demo
 
-Uses the platform_sh ruby gem
+Uses the platform_sh ruby gem installs and runs a Metabase instance with a ruby app next to it.
 
-Just a very short and sweet sinatra app to showoff running and connecting to Redis, Elastic Search, MongoDB, Solr and RabbitMQ, all auto-conifgured, all without any external services required.
-
-For local development just run:
-`platform_local_tunnel_env rackup`
-
-it will open ssh tunnels to your current environment and configure your services to use the remote services.
+1. ** This will require a *large* plan to run **
+2. For it to work in development correctly you would need the large-development plan, contact sales@platform.sh
