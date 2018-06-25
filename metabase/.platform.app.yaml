@@ -1,0 +1,23 @@
+name: metabase
+type: "java"
+
+web:
+    commands:
+       start: |
+           export MEM_AVAILABLE=`./jq .info.limits.memory /run/config.json`
+           export JAVA_TOOL_OPTIONS="-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:MaxPermSize=${MEM_AVAILABLE}m -Xmx${MEM_AVAILABLE}m"
+           ./metabase/bin/start
+relationships:
+    mysql: "mysql:mysql"
+disk: 2048
+variables:
+    env:
+        MB_DB_TYPE: h2
+        MB_DB_FILE: /app/files/h2.db
+hooks:
+  build: |
+    wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64  -O jq
+    chmod +x jq
+    ./compile .
+mounts:
+    "/files": "shared:files/files"

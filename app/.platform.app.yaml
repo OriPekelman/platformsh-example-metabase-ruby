@@ -1,0 +1,28 @@
+name: myrubyapp
+type: "ruby:2.4"
+
+web:
+    upstream:
+     # Send requests to the app server through a unix socket, whose location
+     # will be defined in an environment variable named SOCKET.
+       socket_family: "unix"
+    commands:
+       start: "unicorn -l $SOCKET -E production config.ru"
+    locations:
+        "/":
+            root: "public"
+            passthru: true
+            expires: 1h
+
+relationships:
+    mysql: "mysql:mysql"
+    "metabase": "metabase:http"
+disk: 2048
+
+hooks:
+  build: |
+    ruby -e 'puts RUBY_VERSION'
+    bundle install
+
+mounts:
+   "/public": "shared:files/files"

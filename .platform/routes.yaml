@@ -1,0 +1,9 @@
+"https://{default}/":
+    type: upstream
+    # the first part should be your project name
+    upstream: "myrubyapp:http"
+"https://metabase.{default}/":
+    type: upstream
+    # the first part should be your project name
+    upstream: "metabase:http"
+
